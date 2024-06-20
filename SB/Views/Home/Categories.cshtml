@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Catalog>
+
+    
+
+<div class="text-center" style="background-size">
+   
+    <h4>BOOKS LIST</h4>
+    <br />
+
+    @foreach (var c in Model)
+    {
+        @Html.ActionLink(c.Value, "List", "Books", new { idCategory = c.Id });<br /> 
+    }
+        
+   
+</div>

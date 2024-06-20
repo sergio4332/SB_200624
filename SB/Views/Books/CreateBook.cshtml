@@ -1,0 +1,40 @@
+﻿@model SB.ViewModels.BookVM
+@{
+}
+
+@using (@Html.BeginForm("Create", "Books", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+  
+    <p>
+        <input type="file" name="files" multiple /> 
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Title, "Title")<br />
+        @Html.EditorFor(m => m.Title)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Author, "Author")<br />
+        @Html.EditorFor(m => m.Author)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Swap, "Swap")<br />
+        @Html.CheckBoxFor(m => m.Swap, true)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Price, "Price")<br />
+        @Html.EditorFor(m => m.Price)
+    </p>
+    <p>
+        @Html.LabelFor(m => m.Info, "Info")<br />
+        @Html.TextAreaFor(mbox=>mbox.Info)
+    </p>
+
+    <p>
+        @Html.DropDownListFor(m => m.Category, @ViewBag.Categories as List<SelectListItem>, "Choose the category")
+    </p>
+
+    <p>
+        <input type="submit" value="Send" />
+   </p>
+    
+}

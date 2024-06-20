@@ -1,0 +1,86 @@
+﻿@using SB.ViewModels
+
+@model BookVM
+
+<style>
+    .new-section {
+        border-radius: 25px;
+        height: 100%;
+        width: 300px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        padding: 20px;
+        text-align: left;
+        background: #FFF4A3;
+    }
+</style>
+
+<h2>Edit Book</h2>
+
+
+
+<form asp-action="edit" asp-controller="Books" asp-route-id="@Model.Id">
+   
+    <p>
+        <label asp-for="Title">Title</label><br/>
+        <input type="text" asp-for="Title"></input>
+    </p>
+    <p>
+        <label asp-for="Author">Author</label><br />
+        <input type="text" asp-for="Author"></input>
+    </p>
+    <p>
+        <label asp-for="Price">Price</label><br />
+        <input type="number" asp-for="Price"></input>
+    </p>
+    <p>
+        <label asp-for="Swap">Swap</label><br />
+        <input type="checkbox" asp-for="Swap"></input>
+    </p>
+    <p>
+        @Html.DropDownListFor(m => m.Category, @ViewBag.Categories as List<SelectListItem>)
+        <br /> 
+        
+    </p>
+    <p>
+        <label asp-for="Info">Info</label><br />
+        <input type="text" asp-for="Info"></input>
+    </p>
+    <p>
+        
+        <label asp-for="EditPhoto">Photo</label><br />
+
+
+        @if (Model.Src != null)
+        {
+            @foreach (var i in Model.Src)
+            {
+                <img src="@i" alt="Photo" class="responsive-image"  />
+                <style>
+                    .responsive-image
+                    {
+                    width:22%;
+                    height:auto;
+                    max-width: 600px;
+                    display:block;
+                    margin:0 auto;
+                    }
+                </style>
+            }
+            <br />
+        }
+        
+        
+    </p>
+    <p>
+        
+        <input type="submit" value="Save" formmethod="post"></input>
+    </p>
+
+    </form>
+
+<br />
+
+
+
+
