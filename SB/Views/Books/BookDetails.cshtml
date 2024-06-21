@@ -5,11 +5,11 @@
 <h4>BOOK DETAILS</h4>
 <br />
 
-@if (Model.Src != null)
+@if (Model.Pictures != null)
 {
-    @foreach (var i in Model.Src)
+    @foreach (var i in Model.Pictures)
     {
-        <img src="@i" alt="Photo" width="100" height="150" />
+        <img src="@i.Src" alt="Photo" width="100" height="150" />
     }
     <br />
 }

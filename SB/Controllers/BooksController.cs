@@ -46,31 +46,24 @@ namespace SB.Controllers
         // EDIT 
         [HttpGet]
         public IActionResult Edit(int idBook )
-        {
-            
+        {            
                 using (SwapBookDbContext dbContext = new SwapBookDbContext())
                 {
-               
+                    var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation")
+                            .FirstOrDefault(b => b.Id == idBook);
 
-                var e = dbContext.Books.Include(e => e.Galaries).Include("IdCatalogNavigation")
-                        .FirstOrDefault(b => b.Id == idBook);
+                    var categories = dbContext.Catalogs.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Value
+                        , Selected= e.IdCatalog==c.Id }).ToList();
 
-                var categories = dbContext.Catalogs.Select(c => new SelectListItem { Value = c.Id.ToString(), Text = c.Value
-                    , Selected= e.IdCatalog==c.Id }).ToList();
+                      ViewBag.Categories = categories;  
 
-                  ViewBag.Categories = categories;  
-
-                var eVM = new GetBookModel().GetBookVM(e);
-                     return View("EditBook" , eVM); 
+                    var eVM = new GetBookModel().GetBookVM(e);
+                         return View("EditBook" , eVM); 
                 }
-           
-            
-               
-            
-            
         }
+
         [HttpPost]
-        public IActionResult Edit(BookVM eVM)
+        public IActionResult Edit(BookVM eVM, IFormFile[] files)
         {
             SwapBookDbContext db = new SwapBookDbContext();
 

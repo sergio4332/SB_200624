@@ -12,10 +12,19 @@
         public bool Swap { get; set; } = false;
       
         public byte[] ? EditPhoto { get; set; }
-        public string[] ?Src { get; set; }
+
+        public Picture[] Pictures { get; set; }
+
         public string Category { get; set; }
 
         public string? Info { get; set; }
 
+    }
+
+    public class Picture
+    {
+        public int Id { get; set; }
+
+        public string Src { get; set; }
     }
 }

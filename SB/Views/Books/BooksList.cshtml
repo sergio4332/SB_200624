@@ -14,9 +14,9 @@
 {
     <tr>
 
-        @foreach (var i in b.Src)
+        @foreach (var i in b.Pictures)
         {
-            <img src="@i" alt="Photo" width="70" height="100" />            
+            <img src="@i.Src" alt="Photo" width="70" height="100" />            
         }
 
         <b>@Html.LabelFor(x => b.Title)</b>

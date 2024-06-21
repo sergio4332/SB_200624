@@ -39,16 +39,30 @@ namespace SB.Controllers
             {
                 Id = book.Id,
                 Author = book?.Author,
-                Category = book?.IdCatalogNavigation?.Value.ToString()
-                ,
+                Category = book?.IdCatalogNavigation?.Value.ToString(),
                 Info = book?.Info,
                 Price = book?.Price,
                 Swap = book.Swap,
-                Title = book?.Title ,
-                Src = srcs
+                Title = book?.Title,
+                Pictures = GetPictures(book.Galaries)
             };
 
             return bookVM;
+        }
+
+        private Picture[] GetPictures(ICollection<Galary> galaries)
+        {
+            List<Picture> images = new List<Picture>();
+
+            foreach (Galary g in galaries)
+            {
+                if (g.Photo != null)
+                {
+                    images.Add(new Picture { Id = g.Id, Src = "data:image/png;base64, " + Convert.ToBase64String(g.Photo) });
+                }
+            }
+
+            return images.ToArray();
         }
     }
 }
