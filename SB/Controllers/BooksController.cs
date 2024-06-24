@@ -62,6 +62,21 @@ namespace SB.Controllers
                 }
         }
 
+
+        [HttpPost]
+        public JsonResult UpdateData(BookVM bookVM, IFormFile[] files /*int Id, string Name*/)
+        {
+            if (true)
+            {
+                return Json(new { success = true, msg = "Successful operation" });
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Operation failed" });
+            }
+        }
+
+
         [HttpPost]
         public IActionResult Edit(BookVM eVM, IFormFile[] files)
         {
@@ -99,12 +114,30 @@ namespace SB.Controllers
             return RedirectToAction("Info" , "Account");
         }
 
-       /* public IActionResult Delete(int idBook) 
+        /* public IActionResult Delete(int idBook) 
+         {
+          SwapBookDbContext db = new SwapBookDbContext();
+             db.Books.Where(i=>i.Id==idBook).
+         }*/
+
+        // Удаление фото книги
+        public JsonResult DeletePhoto(int id)
         {
-         SwapBookDbContext db = new SwapBookDbContext();
-            db.Books.Where(i=>i.Id==idBook).
-        }*/
-      
+            using (var db = new SwapBookDbContext())
+            {
+                var galary = db.Galaries.Find(id);
+                if (galary != null)
+                {
+                    db.Galaries.Remove(galary);
+                    db.SaveChanges();
+                    return Json(new { success = true, msg = "Фото книги удалено" });
+                }
+                else
+                {
+                    return Json(new { success = false, msg = "Фото книги не найдено" });
+                }
+            }
+        }
 
         public IActionResult Create()
         {
@@ -125,7 +158,6 @@ namespace SB.Controllers
         }
 
         [HttpPost]
-
         public IActionResult Create(BookVM newBook, IFormFile[] files)
         {
             using (var dbContext = new SwapBookDbContext())

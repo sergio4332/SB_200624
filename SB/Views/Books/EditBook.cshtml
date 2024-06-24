@@ -95,14 +95,42 @@
     </style>
 
     <script type="text/javascript">
-        let deletedImages = [];
-
-
+        
         function onDelete(id) {
-            deletedImages.push(id);
-            $('#' + id).remove();
-            //alert(deletedImages);
+            if (!confirm("Удалить фото?"))  
+                return;
+
+            $.ajax({
+                url: '@Url.Action("DeletePhoto", "Books")',
+                data: { id },
+                success: function (result) {
+                    $('#' + id).remove();
+                    //alert(result.msg);                    
+                },
+                error: function (result) {
+                    alert(result.msg);
+                }
+            })
         }
+
+        // function doUpdate() {
+
+        //     var formData = {
+        //         Id: 1,
+        //         Title: $('#Title').val(),
+        //         Author: $('#Author').val(),
+        //         Src: ["1", "2", "3"]
+        //     };
+
+        //     $.ajax({
+        //         type: "POST",
+        //         url: '@Url.Action("UpdateData", "Books")',
+        //         data: formData,
+        //         success: function (result) {
+        //             alert('success')
+        //         }
+        //     })
+        // }
 
     </script>
 
@@ -132,6 +160,10 @@
     <p>        
         <input type="submit" value="Save" formmethod="post" />
     </p>
+
+@*     <p>
+        <input type="button" value="Update" onclick="doUpdate()" />
+    </p> *@
 
     </form>
 
