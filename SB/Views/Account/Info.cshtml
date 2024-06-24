@@ -6,16 +6,7 @@
 @{
     ViewData["Title"] = "My Account";
 }
-<style>
-    .responsive-image {
-        width: 33%;
-        min-height:80px;
-        height: auto;
-        max-width: 600px;
-        display: block;
-        margin: 0 auto;
-    }
-</style>
+
 <style>
     .new-section {
         border-radius: 30px;
@@ -66,7 +57,7 @@ MY BOOKS LIST
 
         @if (@b.Pictures.Length != 0)
         {
-            <img src="@b.Pictures[0].Src" alt="Photo" width="70" height="100" class="responsive-image" />
+            <img src="@b.Pictures[0].Src" alt="Photo" class="responsive-image" />
         }
         else
         {            

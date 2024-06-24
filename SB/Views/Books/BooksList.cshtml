@@ -2,6 +2,19 @@
 
 @model IEnumerable<BookVM>  
 
+<style>
+    .img {
+        /* width: 33%; */
+        min-height: 80px;
+        height: auto;
+        max-width: 230px;
+        max-height: 95px;
+        /* display: block; */
+        width: auto;
+        margin: 0 auto;
+    }
+</style>
+
 <h4>BOOKS LIST</h4>
 <br />
 
@@ -16,7 +29,7 @@
 
         @foreach (var i in b.Pictures)
         {
-            <img src="@i.Src" alt="Photo" width="70" height="100" />            
+            <img class="img" src="@i.Src" alt="Photo" width="70" height="100" />            
         }
 
         <b>@Html.LabelFor(x => b.Title)</b>

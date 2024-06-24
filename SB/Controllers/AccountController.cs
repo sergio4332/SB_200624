@@ -66,7 +66,7 @@ namespace SB.Controllers
 
                 HttpContext.Session.SetInt32("user", user.Id);
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Info", "Account");
             }
             else 
             {
