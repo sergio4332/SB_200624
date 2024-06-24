@@ -109,16 +109,11 @@ namespace SB.Controllers
                 }
                 
             }
-                db.Books.Update(book);
+
+            db.Books.Update(book);
             db.SaveChanges();  // 
             return RedirectToAction("Info" , "Account");
         }
-
-        /* public IActionResult Delete(int idBook) 
-         {
-          SwapBookDbContext db = new SwapBookDbContext();
-             db.Books.Where(i=>i.Id==idBook).
-         }*/
 
         // Удаление фото книги
         public JsonResult DeletePhoto(int id)
@@ -216,12 +211,13 @@ namespace SB.Controllers
             }
 
             return images.ToArray();
-
-            //if (bytes == null)
-            //    return String.Empty;
-
-            //return "data:image/png;base64, " + Convert.ToBase64String(bytes);
         }
+
+        /* public IActionResult Delete(int idBook) 
+        {
+          SwapBookDbContext db = new SwapBookDbContext();
+             db.Books.Where(i=>i.Id==idBook).
+        }*/
     }
 }
 /*
