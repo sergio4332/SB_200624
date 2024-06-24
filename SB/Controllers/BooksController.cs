@@ -62,56 +62,32 @@ namespace SB.Controllers
                 }
         }
 
-
-        [HttpPost]
-        public JsonResult UpdateData(BookVM bookVM, IFormFile[] files /*int Id, string Name*/)
-        {
-            if (true)
-            {
-                return Json(new { success = true, msg = "Successful operation" });
-            }
-            else
-            {
-                return Json(new { success = false, msg = "Operation failed" });
-            }
-        }
-
-
         [HttpPost]
         public IActionResult Edit(BookVM eVM, IFormFile[] files)
         {
             SwapBookDbContext db = new SwapBookDbContext();
 
 
-            Book book = new Book() {Author= eVM.Author , Id =eVM.Id,Title=eVM.Title, Info=eVM.Info 
-                , Price = eVM.Price , Swap=eVM.Swap ,IdUser =GetUserId()};
+            Book book = new Book() { Author= eVM.Author , Id =eVM.Id, Title=eVM.Title, Info=eVM.Info,
+                Price = eVM.Price, Swap=eVM.Swap,IdUser = GetUserId() };
            
-
             book.IdCatalog = Convert.ToInt32(eVM.Category);
             
-
-            Galary galary = new Galary();
-
-             galary.Photo = eVM.EditPhoto;  
-            
-            book.Galaries.Add(galary);
-           
-
-            byte[] photoBytes = eVM.EditPhoto;
-
-            foreach (var item in book.Galaries)
+            foreach (var f in files)
             {
-                int i = 0;
-                while (i < photoBytes?.Length )
+                using (var st = f.OpenReadStream())
                 {
-                    item.Photo = photoBytes;
-                    i++;
+                    byte[] images = new byte[f.Length];
+                    st.Read(images, 0, images.Length);
+
+                    Galary galary = new Galary() { Photo = images };
+                    book.Galaries.Add(galary);
                 }
-                
             }
 
+
             db.Books.Update(book);
-            db.SaveChanges();  // 
+            db.SaveChanges();  
             return RedirectToAction("Info" , "Account");
         }
 
@@ -187,6 +163,19 @@ namespace SB.Controllers
                 dbContext.SaveChanges();
 
                 return RedirectToAction("Details", "Books", new { idBook = book.Id });
+            }
+        }
+
+        [HttpPost]
+        public JsonResult UpdateData(BookVM bookVM, IFormFile[] files /*int Id, string Name*/)
+        {
+            if (true)
+            {
+                return Json(new { success = true, msg = "Successful operation" });
+            }
+            else
+            {
+                return Json(new { success = false, msg = "Operation failed" });
             }
         }
 

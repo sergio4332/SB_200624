@@ -64,14 +64,13 @@ MY BOOKS LIST
 
     <div class="new-section">
 
-        @if (b.Pictures.Length!=0)
+        @if (@b.Pictures.Length != 0)
         {
-            <img src="@b.Pictures[0].Src.First()" alt="Photo" width="70" height="100" class="responsive-image" />
+            <img src="@b.Pictures[0].Src" alt="Photo" width="70" height="100" class="responsive-image" />
         }
         else
-        {
-            
-        <img src="~/images/emptyList.jpg" alt="Photo" width="70" height="100" class="responsive-image" />
+        {            
+            <img src="~/images/emptyList.jpg" alt="Photo" width="70" height="100" class="responsive-image" />
         }
         
       
