@@ -3,6 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using SB.Models;
 using SB.ViewModels;
 
+// https://metanit.com/sharp/aspnet6/13.1.php
+// https://dotnettutorials.net/lesson/login-and-logout-in-asp-net-core-identity/
+// https://dotnettutorials.net/lesson/usermanager-signinmanager-rolemanager-in-asp-net-core-identity/
+
 
 namespace SB.Controllers
 {
